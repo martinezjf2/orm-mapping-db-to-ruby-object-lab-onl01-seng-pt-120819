@@ -69,14 +69,14 @@ class Student
     DB[:conn].execute(sql)
   end
   
-  # def self.all
-  #   sql = <<-SQL
-  #     SELECT *
-  #     FROM students
-  #   SQL
-  #   DB[:conn].execute(sql)
-  #   # WIll HAVE TO USE THE .new_from_db METHOD AS STATED IN THE README
-  # end
+  def self.all
+    sql = <<-SQL
+      SELECT *
+      FROM students
+    SQL
+    DB[:conn].execute(sql)
+    # WIll HAVE TO USE THE .new_from_db METHOD AS STATED IN THE README
+  end
   
   
   
