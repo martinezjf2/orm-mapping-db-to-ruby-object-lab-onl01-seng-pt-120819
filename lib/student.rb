@@ -74,7 +74,7 @@ class Student
       SELECT *
       FROM students
     SQL
-    DB[:conn].execute(sql)
+    DB[:conn].execute(sql).map { |row| self.new_from_db(row) }
     # WIll HAVE TO USE THE .new_from_db METHOD AS STATED IN THE README
   end
   
