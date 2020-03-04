@@ -69,14 +69,14 @@ class Student
     DB[:conn].execute(sql)
   end
   
-  # def self.all
-  #   sql = <<-SQL
-  #     SELECT *
-  #     FROM students
-  #   SQL
-  #   DB[:conn].execute(sql)
-  #   # WIll HAVE TO USE THE .new_from_db METHOD AS STATED IN THE README
-  # end
+  def self.all
+    sql = <<-SQL
+      SELECT *
+      FROM students
+    SQL
+    DB[:conn].execute(sql).map { |row| self.new_from_db(row) }
+    # WIll HAVE TO USE THE .new_from_db METHOD AS STATED IN THE README
+  end
   
   
   
@@ -88,9 +88,38 @@ class Student
     FROM students
     WHERE grade < 12
     SQL
-    DB[:conn].execute(sql)
+    DB[:conn].execute(sql).map { |row| self.new_from_db(row) }
   end
-
+  
+  def self.first_X_students_in_grade_10(number)
+    sql = <<-SQL
+    SELECT *
+    FROM students
+    WHERE grade = 10
+    LIMIT ?
+    SQL
+    DB[:conn].execute(sql, number).map { |row| self.new_from_db(row) }
+  end
+  
+  def self.first_student_in_grade_10
+    sql = <<-SQL
+    SELECT *
+    FROM students
+    WHERE grade = 10
+    LIMIT 1
+    SQL
+    DB[:conn].execute(sql).map { |row| self.new_from_db(row) }.first
+  end
+  
+  def self.all_students_in_grade_X(grade)
+    sql = <<-SQL
+    SELECT *
+    FROM students
+    WHERE grade = ?
+    SQL
+    DB[:conn].execute(sql, grade).map { |row| self.new_from_db(row) }
+    
+  end
   
 end
 
