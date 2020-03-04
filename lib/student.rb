@@ -101,7 +101,7 @@ class Student
     DB[:conn].execute(sql, number).map { |row| self.new_from_db(row) }
   end
   
-  
+  def self
   
 end
 
