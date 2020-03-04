@@ -97,6 +97,7 @@ class Student
     FROM students
     WHERE grade = 10
     SQL
+    DB[:conn]
     
   end
   
