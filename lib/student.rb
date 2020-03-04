@@ -99,7 +99,6 @@ class Student
     LIMIT ?
     SQL
     DB[:conn].execute(sql, number).map { |row| self.new_from_db(row) }
-    
   end
   
   
